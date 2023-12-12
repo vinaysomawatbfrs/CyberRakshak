@@ -1,0 +1,17 @@
+<div class="card-container">
+    <div class="card-heading flex justify-between items-center p-4"
+        [ngClass]="cardType === 'default' ? 'no-header': 'card-header'">
+        <div class="flex items-center">
+            <span class="card-text text-sm font-light">{{ cardHeading.text }}</span>
+            <div *ngIf="cardHeading.tooltip" class="tooltip mb-1" [matTooltip]="cardHeading.tooltip"
+                matTooltipClass="mat-tooltip">
+                <i class="fa fa-info-circle text-sm pl-1" aria-hidden="true"></i>
+            </div>
+        </div>
+        <i class="fa fa-download" aria-hidden="true" *ngIf="isDownloadAllowed" matTooltipClass="mat-tooltip"
+            [matTooltip]="'Click this button to download the selected file or data.'"></i>
+    </div>
+    <div class="card-content">
+        <ng-content></ng-content>
+    </div>
+</div>

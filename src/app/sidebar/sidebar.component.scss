@@ -1,0 +1,53 @@
+/* sidebar.component.css */
+
+.sidebar {
+    width: 200px;
+    height: calc(140vh);
+    background: var(--violet-header);
+    color: #fff;
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sidebar li:hover {
+    background-color: var(--white);
+    /* Set your desired background color for the active link */
+    color: var(--black);
+    cursor: pointer;
+    /* Set your desired text color for the active link */
+}
+
+.sidebar a {
+    text-decoration: none;
+    font-size: 16px;
+    padding-left: 10px;
+}
+
+.header-text {
+    font-size: 20px;
+    color: var(--white);
+    text-align: center;
+}
+
+.sidebar-container {
+    padding-top: 30px;
+}
+
+.active {
+    background-color: var(--white);
+    /* Set your desired background color for the active link */
+    color: var(--black);
+    /* Set your desired text color for the active link */
+}

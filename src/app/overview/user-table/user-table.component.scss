@@ -1,0 +1,23 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    text-align: center;
+    padding: 8px;
+    font-size: 12px;
+}
+
+tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+.send-email {
+    background: var(--card-header);
+}
+
+.restrict-user {
+    background: var(--violet-header);
+}

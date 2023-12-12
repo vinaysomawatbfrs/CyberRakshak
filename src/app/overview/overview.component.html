@@ -1,0 +1,59 @@
+<div class="overview-container" style="width: 110%;">
+    <app-generic-overview [heading]="'Overview'" [subHeading]="subHeading"></app-generic-overview>
+    <div class="card-container flex justify-between">
+        <app-card-tab
+            [cardHeading]="{ text: 'Currently Active Users', tooltip: 'User who logged in Within the Past 30 Days' }"
+            style="flex-grow: 1;">
+            <app-card-user-numbers [cardUserNumberData]="activeUserData"></app-card-user-numbers>
+        </app-card-tab>
+        <app-card-tab
+            [cardHeading]="{ text: 'Dormant Users', tooltip: 'Review the list of dormant users to enhance security and resource optimization.' }"
+            style="flex-grow: 2;" [isDownloadAllowed]="true">
+            <app-card-user-numbers [cardUserNumberData]="dormantUserData"></app-card-user-numbers>
+        </app-card-tab>
+    </div>
+    <div class="card-container flex justify-between">
+        <app-card-tab [cardHeading]="{ text: 'Breach Severity Levels', tooltip: 'Tooltip for Breach Severity Levels' }"
+            [cardType]="'card'" style="flex-grow: 1;">
+            <div class="flex justify-center text-center">
+                <div class="pie-chart-container">
+                    <ag-charts-angular style="height: 100%" [options]="lowPieOptions"></ag-charts-angular>
+                </div>
+                <div class="pie-chart-container">
+                    <ag-charts-angular style="height: 100%" [options]="mediumPieOptions"></ag-charts-angular>
+                </div>
+                <div class="pie-chart-container">
+                    <ag-charts-angular style="height: 100%" [options]="highPieOptions"></ag-charts-angular>
+                </div>
+            </div>
+        </app-card-tab>
+        <app-card-tab
+            [cardHeading]="{ text: 'Screen with high PII breach', tooltip: 'The most frequently requested APIs in the past 24 hours that include PII data.' }"
+            [cardType]="'card'" style="flex-grow: 1;">
+            <div class="flex justify-center text-center">
+                <div class="pie-chart-container">
+                    <ag-charts-angular style="height: 100%" [options]="piiOptions"></ag-charts-angular>
+                </div>
+            </div>
+        </app-card-tab>
+    </div>
+    <div class="card-container flex justify-between">
+        <app-card-tab [cardHeading]="{ text: 'List of High Risk Users', tooltip: 'Top 10 users requesting PII data.' }"
+            [cardType]="'card'" style="flex-grow: 1;">
+            <div class="p-2"><app-user-table [tableData]="userTableData"></app-user-table></div>
+        </app-card-tab>
+        <app-card-tab
+            [cardHeading]="{ text: 'PII Access by User Roles', tooltip: 'PII data accessed within the past 24 hours, categorized based on user roles.' }"
+            [cardType]="'card'" style="flex-grow: 1;">
+            <div class="flex justify-end items-center p-2">
+                <i class="fa fa-download" aria-hidden="true" matTooltipClass="mat-tooltip"
+                    [matTooltip]="'Click this button to download the selected file or data.'"></i>
+            </div>
+            <div class="bar-chart flex justify-center text-center">
+                <div class="bar-chart-container">
+                    <ag-charts-angular style="height: 100%" [options]="barOptions"></ag-charts-angular>
+                </div>
+            </div>
+        </app-card-tab>
+    </div>
+</div>

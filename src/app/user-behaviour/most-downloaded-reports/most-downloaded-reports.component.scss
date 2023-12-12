@@ -1,0 +1,13 @@
+table {
+    border-collapse: separate;
+    border-spacing: 0 2px;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 15px 150px 15px 10px;
+    background-color: var(--white);
+}

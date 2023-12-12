@@ -1,0 +1,35 @@
+<div class="user-behaviour" style="width: 100%;">
+    <app-generic-overview [heading]="'User Behaviour'"
+        [subHeading]="'Here you will see the User behaviour details'"></app-generic-overview>
+    <app-search-view (awbSearchEvent)="handleUserIdSearch($event)" [placeholder]="'Search User ID'"></app-search-view>
+    <div class="text-xs py-2">
+        <p class="py-1">Last Logged in: 09/02/23 10:01:00</p>
+        <p class="py-1">Location: Sector 20</p>
+        <p class="py-1">Device: Web</p>
+    </div>
+    <div class="flex justify-end">
+        <p class="text-xs">Last 30 days</p>
+    </div>
+    <div class="flex" style="gap: 10px">
+        <div class="flex flex-col" style="flex-grow: 1; gap:10px">
+            <app-generic-container [name]="'Risk Analytics'">
+                <app-risk-analytics></app-risk-analytics>
+            </app-generic-container>
+            <app-generic-container [name]="'Most Visited URLs'">
+                <app-most-visited-urls></app-most-visited-urls>
+            </app-generic-container>
+        </div>
+        <div class="flex flex-col" style="flex-grow: 1; gap:10px">
+            <!-- <div>
+                <app-access-hours [cardData]="workingHoursAccess"></app-access-hours>
+            </div>
+            <div>
+                <app-access-hours [cardData]="nonWorkingHoursAccess"></app-access-hours>
+            </div> -->
+            <app-generic-container [name]="'Most Downloaded Reports'">
+                <app-most-downloaded-reports
+                    [mostDownloadedReports]="mostDownloadedReports"></app-most-downloaded-reports>
+            </app-generic-container>
+        </div>
+    </div>
+</div>

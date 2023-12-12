@@ -1,0 +1,44 @@
+.awb-overview-container {
+    height: 100px;
+    background: var(--violet-header);
+    color: var(--white);
+    border-radius: 10px;
+}
+
+p {
+    text-align: center;
+}
+
+.card {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 12px;
+    text-align: center;
+    font-size: 18px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 8px;
+}
+
+strong {
+    font-weight: bold;
+}

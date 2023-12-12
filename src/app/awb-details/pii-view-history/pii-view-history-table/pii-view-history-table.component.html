@@ -1,0 +1,26 @@
+<div class="p-2">
+    <table>
+        <tr>
+            <th *ngFor="let itemHeader of tableHeaders">{{itemHeader}}</th>
+        </tr>
+        <tr *ngFor="let itemData of tableData">
+            <td>{{itemData.timestamps.created}}</td>
+            <td>{{itemData.id}}</td>
+            <td>{{itemData.name}}</td>
+            <td>{{itemData.email}}</td>
+            <td>{{itemData.mobile}}</td>
+            <td>
+                <div *ngIf="type==='view-history'">
+                    <button class="view-insight-btn text-black rounded-lg font-small text-xs px-5 py-2.5"
+                        (click)="redirectToUserBehaviour(itemData.id)">View
+                        User Insights</button>
+                </div>
+                <div *ngIf="type==='awb-list'">
+                    <button class="view-insight-btn text-black rounded-lg font-small text-xs px-5 py-2.5"
+                        (click)="redirectToAwbList()">View
+                        AWB Detail</button>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

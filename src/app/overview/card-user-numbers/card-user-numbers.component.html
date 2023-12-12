@@ -1,0 +1,8 @@
+<div class="flex pl-8 py-2 items-center justify-around" style="gap: 10px">
+    <div *ngFor="let item of cardUserNumberData">
+        <h3 class="item-value">{{ item.value }}</h3>
+        <span *ngIf="item.type !== 'number'">%</span>
+        <p class="card-text text-sm">{{ item.name }}</p>
+        <span class="text-xs" *ngIf="item.text">{{item.text}}</span>
+    </div>
+</div>

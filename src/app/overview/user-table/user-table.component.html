@@ -1,0 +1,26 @@
+<table>
+    <tr>
+        <th *ngFor="let itemHeader of tableHeaders">{{itemHeader}}</th>
+    </tr>
+    <tr *ngFor="let itemData of tableData">
+        <td>{{itemData.id}}</td>
+        <td>{{itemData.name}}</td>
+        <td>{{itemData.email}}</td>
+        <td>
+            <ng-container *ngFor="let item of itemData.role; let last = last">
+                {{ item }}<span *ngIf="!last"> | </span>
+            </ng-container>
+        </td>
+        <td>{{itemData.count}}</td>
+        <td>
+            <div class="flex justify-center items-center" style="gap:10px">
+                <!-- <button class="send-email px-1 text-black rounded-lg font-small text-xs px-5 py-2.5"><i
+                        class="fa fa-envelope px-1" aria-hidden="true"></i>Send
+                    Email</button> -->
+                <button
+                    class="px-1 restrict-user text-white rounded-lg font-medium text-xs px-5 py-2.5 dark:bg-red-600">Restrict
+                    User</button>
+            </div>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,64 @@
+<div class="setting flex flex-col">
+    <app-generic-overview [heading]="'Settings'" [subHeading]="'Here you will see the settings'"></app-generic-overview>
+    <app-generic-container [name]="'Settings'">
+        <div class="connected-apps">
+            <p>PII Data Fields</p>
+            <div class="pii-data-container">
+                <mat-chip-grid #chipGrid aria-label="Enter fruits">
+                    <mat-chip-row class="text-sm" *ngFor="let key of pkeys" (removed)="removeP(key)">
+                        {{key}}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                </mat-chip-grid>
+                <div class="key-value-pair flex justify-around items-center" style="gap:10px">
+                    <mat-form-field class="example-full-width">
+                        <input matInput [(ngModel)]="pkey" placeholder="Key">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput [(ngModel)]="pvalue" placeholder="Value">
+                    </mat-form-field>
+                    <button (click)="addPKeyValuePair()" class="add-button text-sm">Add Field</button>
+                </div>
+            </div>
+        </div>
+        <div class="connected-apps">
+            <p>Threshold Setting</p>
+            <div class="pii-data-container">
+                <mat-chip-grid #chipGrid aria-label="Enter fruits">
+                    <mat-chip-row class="text-sm" *ngFor="let key of tkeys" (removed)="removeT(key)">
+                        {{key}}
+                        <button matChipRemove>
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                </mat-chip-grid>
+                <div class="key-value-pair flex justify-around items-center" style="gap:10px">
+                    <mat-form-field class="example-full-width">
+                        <input matInput [(ngModel)]="tkey" placeholder="Key">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput [(ngModel)]="tvalue" placeholder="Value">
+                    </mat-form-field>
+                    <button (click)="addTKeyValuePair()" class="add-button text-sm">Add Field</button>
+                </div>
+            </div>
+        </div>
+        <div class="connected-apps">
+            <p>Connected Apps</p>
+            <div class="flex" style="gap: 15px">
+                <div class="apps-container" *ngFor="let item of connectedApps">
+                    <div class="flex justify-around items-center">
+                        <img class="w-10 h-10" [src]="item.imgSrc" alt="Slack Icon">
+                        <p>{{item.name}}</p>
+                        <div>
+                            <mat-slide-toggle [checked]="item.checked"
+                                (change)="handleToggleChange($event, item.type)"></mat-slide-toggle>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </app-generic-container>
+</div>

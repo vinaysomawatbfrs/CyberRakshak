@@ -1,0 +1,8 @@
+<div class="flex justify-between items-center text-xs">
+    <span>AWB: <ins>{{awb}}</ins></span>
+    <div class="flex items-center cursor-pointer" (click)="downloadAwbReport()">
+        <i class="fa fa-download pt-1" aria-hidden="true" matTooltipClass="mat-tooltip"
+            [matTooltip]="'Click this button to download the selected file or data.'"></i>
+        <span class="pl-2"><ins>Download AWB Details</ins></span>
+    </div>
+</div>

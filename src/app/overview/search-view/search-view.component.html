@@ -1,0 +1,7 @@
+<div class="flex">
+    <div class="search-container">
+        <input [(ngModel)]="searchQuery" (keyup.enter)="search()" type="text" class="search-input"
+            [placeholder]="placeholder">
+        <button (click)="search()" class="search-icon" type="submit"><i class="fa fa-search"></i></button>
+    </div>
+</div>

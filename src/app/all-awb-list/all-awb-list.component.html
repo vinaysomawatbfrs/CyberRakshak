@@ -1,0 +1,9 @@
+<div class="all-awb-list flex flex-col">
+    <app-generic-overview [heading]="'All AWB List'"
+        [subHeading]="'Here you will see the AWB List'"></app-generic-overview>
+    <app-search-view (awbSearchEvent)="handleAwbOutput($event)"
+        [placeholder]="'Search PII history for AWB'"></app-search-view>
+    <app-generic-container [name]="'AWB List'">
+        <app-awb-history [tableData]="tableData" [type]="'awb-list'"></app-awb-history>
+    </app-generic-container>
+</div>

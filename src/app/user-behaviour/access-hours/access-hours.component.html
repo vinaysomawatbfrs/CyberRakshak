@@ -1,0 +1,6 @@
+<div class="access-hours flex items-center justify-around py-2">
+    <div class="py-2 pb-4" *ngFor="let item of cardData">
+        <h3 [ngClass]="item.isWorking ? '' :'text-red'" class="item-value font-semibold">{{ item.value }}</h3>
+        <p class="card-text text-sm">{{ item.text }}</p>
+    </div>
+</div>
