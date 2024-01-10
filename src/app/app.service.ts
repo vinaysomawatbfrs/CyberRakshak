@@ -15,7 +15,7 @@ import { IAllAwbListData } from "./all-awb-list/all-awb-list.component";
   providedIn: "root",
 })
 export class AppService {
-  private apiUrl = "http://192.168.94.105/";
+  private apiUrl = "https://api.pii.dev/";
 
   constructor(private http: HttpClient) {}
 
