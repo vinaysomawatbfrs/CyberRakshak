@@ -11,50 +11,13 @@ import { AppService } from "../app.service";
 import { SearchViewComponent } from "../overview/search-view/search-view.component";
 import { AgChartOptions } from "ag-charts-community";
 import { AgChartsAngularModule } from "ag-charts-angular";
-
-export interface IAccessHour {
-  text: string;
-  value: number;
-  isWorking: boolean;
-}
-
-export interface HotUrl {
-  url: string;
-  score: number;
-  tag: string;
-}
-
-export interface Request {
-  url: string;
-  tag: string;
-}
-
-export interface Timestamps {
-  created: string;
-  updated: string;
-}
-
-export interface JourneyMapItem {
-  score: number;
-  meta: string;
-  request: Request;
-  timestamps: Timestamps;
-}
-
-export interface RiskAnalyticsItem {
-  hits: number;
-  at: string;
-}
-
-export interface BehaviourAnalyticsResponse {
-  risk_analytics: RiskAnalyticsItem[];
-  access: {
-    working_hours: number;
-    non_working_hours: number;
-  };
-  hot_urls: HotUrl[];
-  journey_map: JourneyMapItem[];
-}
+import {
+  IAccessHour,
+  BehaviourAnalyticsResponse,
+  HotUrl,
+  RiskAnalyticsItem,
+  AccessHoursItem,
+} from "./user-behaviour.model";
 
 @Component({
   selector: "app-user-behaviour",
@@ -75,21 +38,18 @@ export interface BehaviourAnalyticsResponse {
   styleUrls: ["./user-behaviour.component.scss"],
 })
 export class UserBehaviourComponent implements OnInit {
-  workingHoursAccess: IAccessHour[] = [
-    {
-      text: "Access During Working Hours",
-      value: 25,
-      isWorking: true,
-    },
-  ];
+  riskAnalyticsOptions: AgChartOptions = {};
+  workingHoursAccess: IAccessHour = {
+    text: "",
+    value: 0,
+    isWorking: false,
+  };
 
-  nonWorkingHoursAccess: IAccessHour[] = [
-    {
-      text: "Access During Non-Working Hours",
-      value: 10,
-      isWorking: false,
-    },
-  ];
+  nonWorkingHoursAccess: IAccessHour = {
+    text: "",
+    value: 0,
+    isWorking: false,
+  };
 
   mostDownloadedReports: string[] = [
     "AWB Order Report",
@@ -111,82 +71,15 @@ export class UserBehaviourComponent implements OnInit {
   }
 
   getBehaviourAnalytics(userId: string | null) {
-    const behaviourRes: BehaviourAnalyticsResponse = {
-        risk_analytics: [
-          {
-            hits: 1,
-            at: "2024-01-09 18:52:17",
-          },
-          {
-            hits: 1,
-            at: "2024-01-09 18:54:30",
-          },
-          {
-            hits: 1,
-            at: "2024-01-09 18:55:07",
-          },
-        ],
-        access: {
-          working_hours: 0,
-          non_working_hours: 0,
-        },
-        hot_urls: [
-          {
-            url: "https://api.pidash.dev/test",
-            score: 12,
-            tag: "get-shipment-details",
-          },
-          {
-            url: "api/v1/orders/details/12345",
-            score: 2,
-            tag: "get-shipment-details",
-          },
-        ],
-        journey_map: [
-          {
-            score: 2,
-            meta: "[]",
-            request: {
-              url: "api/v1/orders/details/12345",
-              tag: "get-shipment-details",
-            },
-            timestamps: {
-              created: "2024-01-09 18:44:11",
-              updated: "2024-01-09 18:44:11",
-            },
-          },
-          {
-            score: 2,
-            meta: "[]",
-            request: {
-              url: "api/v1/orders/details/12345",
-              tag: "get-shipment-details",
-            },
-            timestamps: {
-              created: "2024-01-09 18:42:57",
-              updated: "2024-01-09 18:42:57",
-            },
-          },
-          {
-            score: 2,
-            meta: "[]",
-            request: {
-              url: "api/v1/orders/details/12345",
-              tag: "get-shipment-details",
-            },
-            timestamps: {
-              created: "2024-01-09 18:42:50",
-              updated: "2024-01-09 18:42:50",
-            },
-          },
-        ],
-      };
-
-    // this.visitedURLsData = this.buildDataForMostVisitedUrls(behaviourRes.hot_urls);
-    // console.log(this.visitedURLsData);
-    this.appService.getBehaviourAnalytics(userId).subscribe((res) => {
-      console.log(res);
-    });
+    this.appService
+      .getBehaviourAnalytics(userId)
+      .subscribe((res: BehaviourAnalyticsResponse) => {
+        this.visitedURLsData = this.buildDataForMostVisitedUrls(res?.hot_urls);
+        this.riskAnalyticsOptions = this.buildDataForRiskAnalytics(
+          res?.risk_analytics
+        );
+        this.buildDataForAccessHours(res?.access);
+      });
   }
 
   buildDataForMostVisitedUrls(data: HotUrl[]): AgChartOptions {
@@ -204,7 +97,7 @@ export class UserBehaviourComponent implements OnInit {
 
     for (const item of data) {
       tempData[item.url] = item.score;
-      tempData['quarter'] = 'Most Visited URLs';
+      tempData["quarter"] = "Most Visited URLs";
       newSeries.push({
         type: "bar",
         xKey: "quarter",
@@ -219,6 +112,55 @@ export class UserBehaviourComponent implements OnInit {
     };
   }
 
+  buildDataForRiskAnalytics(data: RiskAnalyticsItem[]): AgChartOptions {
+    const newSeries: {
+      type: "line";
+      xKey: string;
+      yKey: string;
+      yName: string;
+    }[] = [
+      {
+        type: "line",
+        xKey: "at",
+        yKey: "hits",
+        yName: "No of time PII Accessed",
+      },
+    ];
+
+    type SeverityMap = Record<string, number | string>;
+
+    const tempData: SeverityMap[] = [];
+
+    for (const item of data) {
+      tempData.push({
+        at: item.at,
+        hits: item.hits,
+        quarter: "Most Visited URLs",
+      });
+    }
+
+    return {
+      data: tempData,
+      title: {
+        text: "Daily AWB PII Accessed",
+      },
+      series: newSeries,
+    };
+  }
+
+  buildDataForAccessHours(data: AccessHoursItem): void {
+    this.workingHoursAccess = {
+      text: "Access During Working Hours",
+      value: data.working_hours,
+      isWorking: true,
+    };
+    this.nonWorkingHoursAccess = {
+      text: "Access During Non-Working Hours",
+      value: data.non_working_hours,
+      isWorking: false,
+    };
+  }
+
   handleUserIdSearch(event: any) {
     this.appService
       .getBehaviourAnalytics(event.target.value)
@@ -227,3 +169,5 @@ export class UserBehaviourComponent implements OnInit {
       });
   }
 }
+export { IAccessHour };
+

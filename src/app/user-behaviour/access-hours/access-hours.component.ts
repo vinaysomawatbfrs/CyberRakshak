@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { IAccessHour } from "../user-behaviour.component";
+import { IAccessHour } from "../user-behaviour.model";
 
 @Component({
   selector: "app-access-hours",
@@ -10,5 +10,9 @@ import { IAccessHour } from "../user-behaviour.component";
   styleUrls: ["./access-hours.component.scss"],
 })
 export class AccessHoursComponent {
-  @Input() cardData: IAccessHour[] = [];
+  @Input() item: IAccessHour = {
+    text: "",
+    value: 0,
+    isWorking: false
+  };
 }

@@ -13,26 +13,19 @@
     <div class="flex" style="gap: 10px">
         <div class="flex flex-col" style="flex-grow: 1; gap:10px">
             <app-generic-container [name]="'Risk Analytics'">
-                <app-risk-analytics></app-risk-analytics>
+                <app-risk-analytics [lineOptions]='riskAnalyticsOptions'></app-risk-analytics>
             </app-generic-container>
             <app-generic-container [name]="'Most Visited URLs'">
-                <!-- <div class="p-4">
-                    <div class="flex justify-center text-center">
-                        <div class="bar-chart-container">
-                            <ag-charts-angular style="height: 100%" [options]="visitedURLsData"></ag-charts-angular>
-                        </div>
-                    </div>
-                </div> -->
-                <app-most-visited-urls></app-most-visited-urls>
+                <app-most-visited-urls [barOptions]="visitedURLsData"></app-most-visited-urls>
             </app-generic-container>
         </div>
         <div class="flex flex-col" style="flex-grow: 1; gap:10px">
-            <!-- <div>
-                <app-access-hours [cardData]="workingHoursAccess"></app-access-hours>
+            <div>
+                <app-access-hours [item]="workingHoursAccess"></app-access-hours>
             </div>
             <div>
-                <app-access-hours [cardData]="nonWorkingHoursAccess"></app-access-hours>
-            </div> -->
+                <app-access-hours [item]="nonWorkingHoursAccess"></app-access-hours>
+            </div>
             <app-generic-container [name]="'Most Downloaded Reports'">
                 <app-most-downloaded-reports
                     [mostDownloadedReports]="mostDownloadedReports"></app-most-downloaded-reports>
