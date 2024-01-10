@@ -8,5 +8,5 @@ import { LoaderService } from "./loader.service";
 })
 export class AppComponent {
   constructor(public loaderService: LoaderService) {}
-  title = "cybersafeview";
+  title = "Cyberरक्षक";
 }

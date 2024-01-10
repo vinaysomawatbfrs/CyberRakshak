@@ -14,12 +14,6 @@ export class MostVisitedUrlsComponent {
   public barOptions: AgChartOptions;
   constructor() {
     this.barOptions = {
-      // title: {
-      //   text: "Apple's Revenue by Product Category",
-      // },
-      // subtitle: {
-      //   text: "In Billion U.S. Dollars",
-      // },
       data: [
         {
           quarter: "Q1'18",
