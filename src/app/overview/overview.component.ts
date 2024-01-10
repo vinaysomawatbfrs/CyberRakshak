@@ -21,13 +21,13 @@ export interface IBreachedLevelsEntity {
 }
 export interface IDormantUsersEntity {
   name: string;
-  text: string;
+  text: string | null;
   value: number;
   type: string;
 }
 export interface IActiveUsersEntity {
   name: string;
-  text: string;
+  text: string | null;
   value: number;
   type: string;
 }
@@ -35,7 +35,7 @@ export interface IActiveUsersEntity {
 export interface IPiiScreens {
   url: string;
   severity: number;
-  tag: string;
+  tag: string | null;
 }
 
 export interface IPiiDepartments {
@@ -213,12 +213,13 @@ export class OverviewComponent implements OnInit {
       yName: string;
     }[] = [];
 
-    type SeverityMap = Record<string, number>;
+    type SeverityMap = Record<string, number | string>;
 
     const tempData: SeverityMap = {};
 
     for (const item of data) {
       tempData[item.name.toLowerCase()] = item.severity;
+      tempData['quarter'] = item.name;
       newSeries.push({
         type: "bar",
         xKey: "quarter",
